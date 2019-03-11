@@ -1,0 +1,15 @@
+The {{ }} contains JavaScript which is run by Angular and the output inserted in the HTML.
+
+Whenever you need to communicate properties (variables, objects, arrays, etc..) from the component class to the template, you can use interpolation.
+
+Important Points:
+1 - returns only string
+2 - functions can also be passed and it must return string 
+
+content between {{ propertyName }} should be a instance variable in its component
+
+
+Eg:
+So if we put {{ 1 + 1 }} in the template the number 2 would be inserted into the HTML.
+
+<p>Your bucket list ({{ itemCount }})</p>

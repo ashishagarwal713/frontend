@@ -1,0 +1,12 @@
+What if we wanted to use our input textfield to both retrieve and set its value from a component class?
+We can use what's called ngModel to create that 2-way data binding.
+
+Example:
+
+<input type="text" class="txt" name="item" placeholder="Life goal.." [(ngModel)]="goalText">
+
+<br><span>{{ goalText }}</span><br>
+
+If you reload, you will find that the component has communicated the default value of goalText to both the input and the span.
+
+Try changing the value of the input, and you will notice that goalText becomes updated from the template to the component, which is demonstrated by the span element that we added.

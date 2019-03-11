@@ -1,0 +1,13 @@
+() - 
+
+function is executed based on some events.
+
+Eg:
+<input type="submit" class="btn" value="{{ btnText }}" (click)="addItem()">
+
+That's where event binding comes in. 
+We can use event binding to capture a variety of user-initiated events to initiate logic in our component class. 
+Angular 5 supports many events listed here.
+
+
+*Mouse Events left.

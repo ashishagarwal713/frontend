@@ -1,0 +1,8 @@
+[] - property of DOM changes/depends on some variable/condition
+
+Example: 
+<input type="submit" class="btn" [value]="btnText">
+
+
+<!-- Interpolation -->
+<input type="submit" class="btn" value="{{ btnText }}">

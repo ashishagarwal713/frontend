@@ -1,0 +1,3 @@
+AngularJS reads the HTML and compiles it into an internal representation, this reading and compiling is called bootstrapping.
+
+When you write the code to execute the bootstrapping instead of using ng-app directive then it is called manual bootstrapping.
