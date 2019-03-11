@@ -1,0 +1,39 @@
+1 - Parent to Child: Sharing Data via Input
+
+This is probably the most common and straightforward method of sharing data. It works by using the @Input() decorator to allow data to be passed via the template.
+
+
+//Parent.ts
+
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-parent',
+  template: `
+    <app-child [childMessage]="parentMessage"></app-child>
+  `,
+  styleUrls: ['./parent.component.css']
+})
+export class ParentComponent{
+  parentMessage = "message from parent"
+  constructor() { }
+}
+
+//Child.ts
+
+import { Component, Input } from '@angular/core';
+
+@Component({
+  selector: 'app-child',
+  template: `
+      Say {{ message }}
+  `,
+  styleUrls: ['./child.component.css']
+})
+export class ChildComponent {
+
+  @Input() childMessage: string;
+
+  constructor() { }
+
+}

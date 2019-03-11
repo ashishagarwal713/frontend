@@ -1,0 +1,57 @@
+Child to Parent: Sharing Data via Output() and EventEmitter
+Another way to share data is to emit data from the child, which can be listed to by the parent. 
+This approach is ideal when you want to share data changes that occur on things like button clicks, form entires, and other user events.
+
+In the parent, we create a function to receive the message and set it equal to the message variable.
+
+In the child, we declare a messageEvent variable with the Output decorator and set it equal to a new event emitter. 
+Then we create a function named sendMessage that calls emit on this event with the message we want to send. Lastly, we create a button to trigger this function.
+
+The parent can now subscribe to this messageEvent that’s outputted by the child component, then run the receive message function whenever this event occurs.
+
+//Parent.ts
+
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-parent',
+  template: `
+    Message: {{message}}
+    <app-child (messageEvent)="receiveMessage($event)"></app-child>
+  `,
+  styleUrls: ['./parent.component.css']
+})
+export class ParentComponent {
+
+  constructor() { }
+
+  message:string;
+
+  receiveMessage($event) {
+    this.message = $event
+  }
+}
+
+//Child.ts
+
+import { Component, Output, EventEmitter } from '@angular/core';
+
+@Component({
+  selector: 'app-child',
+  template: `
+      <button (click)="sendMessage()">Send Message</button>
+  `,
+  styleUrls: ['./child.component.css']
+})
+export class ChildComponent {
+
+  message: string = "Hola Mundo!"
+
+  @Output() messageEvent = new EventEmitter<string>();
+
+  constructor() { }
+
+  sendMessage() {
+    this.messageEvent.emit(this.message)
+  }
+}

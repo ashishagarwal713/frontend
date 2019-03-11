@@ -1,0 +1,48 @@
+Child to Parent: Sharing Data via ViewChild
+ViewChild allows a one component to be injected into another, giving the parent access to its attributes and functions. 
+One caveat, however, is that child won’t be available until after the view has been initialized. 
+This means we need to implement the AfterViewInit lifecycle hook to receive the data from the child.
+
+//Parent.ts 
+
+import { Component, ViewChild, AfterViewInit } from '@angular/core';
+import { ChildComponent } from "../child/child.component";
+
+@Component({
+  selector: 'app-parent',
+  template: `
+    Message: {{ message }}
+    <app-child></app-child>
+  `,
+  styleUrls: ['./parent.component.css']
+})
+export class ParentComponent implements AfterViewInit {
+
+  @ViewChild(ChildComponent) child;
+
+  constructor() { }
+
+  message:string;
+
+  ngAfterViewInit() {
+    this.message = this.child.message
+  }
+}
+
+//Child.ts
+
+import { Component} from '@angular/core';
+
+@Component({
+  selector: 'app-child',
+  template: `
+  `,
+  styleUrls: ['./child.component.css']
+})
+export class ChildComponent {
+
+  message = 'Hola Mundo!';
+
+  constructor() { }
+
+}

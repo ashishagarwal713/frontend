@@ -1,0 +1,6 @@
+1. What is Transpiling in Angular?
+Transpiling is the process of converting the typescript into javascript (using Traceur, a JS compiler). 
+Though typescript is used to write code in the Angular applications, the code is internally transpiled into javascript.
+
+2. Which of the Angular life cycle component execution happens when a data-bound input value updates?
+ngOnChanges is the life cycle hook that gets executed whenever a change happens to the data that was bound to an input. 
