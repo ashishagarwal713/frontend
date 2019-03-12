@@ -1,0 +1,59 @@
+import HttpClientModule in app.module.ts
+
+After adding the module to the imports array, we are now ready to use the new HttpClient API to send GET, POST, PUT and DELETE requests to a REST HTTP server.
+
+RESTful web services allow the requesting systems to access and manipulate textual representations of web resources by using a uniform and predefined set of stateless operations. 
+In more simple words: REST is a set of HTTP endpoints that provide a CRUD (Create, Read, Update, and Delete) interface on some server resources.
+
+The HttpClient module is built on top of the XMLHttpRequest interface. It wraps all the complexities of this interface and provides extra features like:
+
+RxJS Obervables,
+Interceptors for requests and responses,
+Types for requests and responses,
+Better error handling,
+Support for testing,
+
+Example:
+
+//GET Request
+
+import { HttpClient } from '@angular/common/http';
+
+@Injectable({
+  providedIn: 'root'
+})
+
+export class StudentService {
+
+  constructor(private http:HttpClient) { }
+
+  getPersonalInfo(id:number){
+    const url=environment.baseServiceUrl+'/getStudentPersonalInfo/' + id;
+    return this.http.get(url)
+    .map((response:any)=>{
+      const data = response.json();
+      return data;
+    });
+  }
+  
+// POST Request
+  
+    validate(userCredentials:any){
+    const url= environment.baseServiceUrl+'/validate';
+    return this.http.post(url,userCredentials)
+    .map((response:any)=>{
+      console.log("hi",userCredentials);
+      console.log("resp",response);
+      const data =response;
+      return data;
+    });
+  }
+
+component.ts
+this.serviceName.functionName({{data}}).subscribe((response)=>{this.data=response.data})
+
+{observe:Resposne}
+  
+** Retrieve data from paginated links...
+
+  

@@ -1,0 +1,80 @@
+Unrelated Components: Sharing Data with a Service
+When passing data between components that lack a direct connection, such as siblings, grandchildren, etc, you should you a shared service. 
+
+The parent, child, and sibling components all receive the same treatment. We inject the DataService in the constructor, 
+then subscribe to the currentMessage observable and set its value equal to the message variable.
+
+Now if we create a function in any one of these components that changes the value of the message. 
+when this function is executed the new data it’s automatically broadcast to all other components.
+
+//data.service.ts
+
+import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+
+@Injectable()
+export class DataService {
+
+  private messageSource = new BehaviorSubject('default message');
+  currentMessage = this.messageSource.asObservable();
+
+  constructor() { }
+
+  changeMessage(message: string) {
+    this.messageSource.next(message)
+  }
+
+}
+
+//parent.ts
+
+import { Component, OnInit } from '@angular/core';
+import { DataService } from "../data.service";
+
+@Component({
+  selector: 'app-parent',
+  template: `
+    {{message}}
+  `,
+  styleUrls: ['./sibling.component.css']
+})
+export class ParentComponent implements OnInit {
+
+  message:string;
+
+  constructor(private data: DataService) { }
+
+  ngOnInit() {
+    this.data.currentMessage.subscribe(message => this.message = message)
+  }
+
+}
+
+//sibling.ts
+
+import { Component, OnInit } from '@angular/core';
+import { DataService } from "../data.service";
+
+@Component({
+  selector: 'app-sibling',
+  template: `
+    {{message}}
+    <button (click)="newMessage()">New Message</button>
+  `,
+  styleUrls: ['./sibling.component.css']
+})
+export class SiblingComponent implements OnInit {
+
+  message:string;
+
+  constructor(private data: DataService) { }
+
+  ngOnInit() {
+    this.data.currentMessage.subscribe(message => this.message = message)
+  }
+
+  newMessage() {
+    this.data.changeMessage("Hello from Sibling")
+  }
+
+}

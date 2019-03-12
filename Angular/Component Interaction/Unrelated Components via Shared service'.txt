@@ -1,2 +1,0 @@
-Unrelated Components: Sharing Data with a Service
-When passing data between components that lack a direct connection, such as siblings, grandchildren, etc, you should you a shared service. 
